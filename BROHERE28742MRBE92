@@ -48,15 +48,6 @@ getgenv().AirHub.Aimbot = {
     FOVCircle = Drawingnew("Circle")
 }
 
-local TextLabel = Drawing.new("Text")
-TextLabel.Size = 20
-TextLabel.Center = true
-TextLabel.Outline = true
-TextLabel.OutlineColor = Color3.fromRGB(0, 0, 0)
-TextLabel.OutlineTransparency = 0.5
-TextLabel.Font = 1 -- Enum.Font.SourceSansBold
-TextLabel.TextSize = 18
-
 local Environment = getgenv().AirHub.Aimbot
 
 --// Core Functions
@@ -75,18 +66,16 @@ local function PredictPosition(target)
 end
 
 local function DrawPlayerName(player, position)
-    if Environment.Locked and Environment.Locked == player then
+    if Environment.Locked == player then
         local screenPos, onScreen = Camera:WorldToViewportPoint(position)
         if onScreen then
-            local text = player.Name
-            TextLabel.Text = text
-            TextLabel.Position = Vector2.new(screenPos.X, screenPos.Y + 30) -- Adjust Y position
-            TextLabel.Visible = true
+            Environment.FOVCircle.Text = player.Name -- Set the text to player's name if locked onto a player
+            Environment.FOVCircle.Position = Vector2.new(screenPos.X, screenPos.Y + Environment.FOVCircle.Radius) -- Adjust Y position to be at the bottom of the FOV circle
         else
-            TextLabel.Visible = false
+            Environment.FOVCircle.Text = "None" -- If the player is off-screen, display "None"
         end
     else
-        TextLabel.Visible = false
+        Environment.FOVCircle.Text = "None" -- If not locked onto anyone, display "None"
     end
 end
 
@@ -224,7 +213,6 @@ function Environment.Functions:Exit()
     end
 
     Environment.FOVCircle:Remove()
-    TextLabel:Remove()
 
     getgenv().AirHub.Aimbot.Functions = nil
     getgenv().AirHub.Aimbot = nil
