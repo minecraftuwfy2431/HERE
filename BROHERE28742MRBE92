@@ -85,8 +85,11 @@ local function GetClosestPlayer()
                 if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
                 if Environment.Settings.WallCheck and #(Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants())) > 0 then continue end
 
-                local predictedPosition = PredictPosition(v)
-                local Vector, OnScreen = Camera:WorldToViewportPoint(predictedPosition); Vector = ConvertVector(Vector)
+                local predictedPosition = PredictPosition(v) -- Get the predicted position
+                
+                -- Use the predicted position if available
+                local targetPosition = predictedPosition or v.Character[Environment.Settings.LockPart].Position
+                local Vector, OnScreen = Camera:WorldToViewportPoint(targetPosition); Vector = ConvertVector(Vector)
                 local Distance = (UserInputService:GetMouseLocation() - Vector).Magnitude
 
                 if Distance < RequiredDistance and OnScreen then
@@ -99,6 +102,7 @@ local function GetClosestPlayer()
         CancelLock()
     end
 end
+
 
 local function Load()
     OriginalSensitivity = UserInputService.MouseDeltaSensitivity
