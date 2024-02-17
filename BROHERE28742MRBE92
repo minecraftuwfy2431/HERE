@@ -103,7 +103,6 @@ local function GetClosestPlayer()
     end
 end
 
-
 local function Load()
     OriginalSensitivity = UserInputService.MouseDeltaSensitivity
 
