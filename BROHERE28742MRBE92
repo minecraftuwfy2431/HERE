@@ -68,10 +68,10 @@ end
 local function DrawPlayerName(player, position)
     local screenPos, onScreen = Camera:WorldToViewportPoint(position)
     if onScreen then
-        local nameText = Drawingnew("Text")
+        local nameText = Drawing.new("Text")
         nameText.Text = player.Name
         nameText.Size = 18
-        nameText.Position = Vector2new(screenPos.X, screenPos.Y)
+        nameText.Position = Vector2.new(screenPos.X, screenPos.Y + Environment.FOVCircle.Radius) -- Adjust Y position to be at the bottom of the FOV circle
         nameText.Color = Color3.new(1, 1, 1)
         nameText.Visible = true
         nameText.Center = true
@@ -80,6 +80,7 @@ local function DrawPlayerName(player, position)
         nameText.Parent = Environment.FOVCircle
     end
 end
+
 
 local function CancelLock()
     Environment.Locked = nil
