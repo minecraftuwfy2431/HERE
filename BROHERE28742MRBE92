@@ -29,8 +29,7 @@ getgenv().AirHub.Aimbot = {
         Toggle = false,
         LockPart = "Head", -- Body part to lock on
         PredictionEnabled = true, -- Set to true to enable prediction
-        PredictionAmount = 0.1, -- Default prediction amount (adjust as needed)
-        LockText = false -- Added new boolean setting
+        PredictionAmount = 0.1 -- Default prediction amount (adjust as needed)
     },
 
     FOVSettings = {
@@ -62,20 +61,6 @@ local function PredictPosition(target)
         return predictedPosition
     else
         return target.Character and target.Character:FindFirstChild(Environment.Settings.LockPart) and target.Character[Environment.Settings.LockPart].Position or nil
-    end
-end
-
-local function DrawPlayerName(player, position)
-    if Environment.Locked == player then
-        local screenPos, onScreen = Camera:WorldToViewportPoint(position)
-        if onScreen then
-            Environment.FOVCircle.Text = player.Name -- Set the text to player's name if locked onto a player
-            Environment.FOVCircle.Position = Vector2.new(screenPos.X, screenPos.Y + Environment.FOVCircle.Radius) -- Adjust Y position to be at the bottom of the FOV circle
-        else
-            Environment.FOVCircle.Text = "None" -- If the player is off-screen, display "None"
-        end
-    else
-        Environment.FOVCircle.Text = "None" -- If not locked onto anyone, display "None"
     end
 end
 
@@ -155,11 +140,6 @@ local function Load()
                 end
 
                 Environment.FOVCircle.Color = Environment.FOVSettings.LockedColor
-
-                -- Draw player name if LockText is enabled
-                if Environment.Settings.LockText then
-                    DrawPlayerName(Environment.Locked, Environment.Locked.Character[Environment.Settings.LockPart].Position)
-                end
             end
         end
     end)
@@ -241,8 +221,7 @@ function Environment.Functions:ResetSettings()
         Toggle = false,
         LockPart = "Head", -- Body part to lock on
         PredictionEnabled = true, -- Set to true to enable prediction
-        PredictionAmount = 0.1,
-        LockText = false -- Reset LockText setting
+        PredictionAmount = 0.1 -- Default prediction amount (adjust as needed)
     }
 
     Environment.FOVSettings = {
