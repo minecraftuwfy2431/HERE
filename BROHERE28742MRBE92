@@ -66,18 +66,26 @@ local function PredictPosition(target)
 end
 
 local function DrawPlayerName(player, position)
-    local screenPos, onScreen = Camera:WorldToViewportPoint(position)
-    if onScreen then
-        local nameText = Drawing.new("Text")
-        nameText.Text = player.Name
-        nameText.Size = 18
-        nameText.Position = Vector2.new(screenPos.X, screenPos.Y + Environment.FOVCircle.Radius) -- Adjust Y position to be at the bottom of the FOV circle
-        nameText.Color = Color3.new(1, 1, 1)
-        nameText.Visible = true
-        nameText.Center = true
-        nameText.Outline = true
-        nameText.Font = 1 -- Monospace font
-        nameText.Parent = Environment.FOVCircle
+    if Environment.Locked == player then
+        local screenPos, onScreen = Camera:WorldToViewportPoint(position)
+        if onScreen then
+            local nameText = Drawing.new("Text")
+            nameText.Text = player.Name
+            nameText.Size = 24 -- Increase font size for a more appealing look
+            nameText.Position = Vector2.new(screenPos.X, screenPos.Y + Environment.FOVCircle.Radius) -- Adjust Y position to be at the bottom of the FOV circle
+            nameText.Color = Color3.new(1, 0, 0) -- Change text color to red for emphasis
+            nameText.Visible = true
+            nameText.Center = true
+            nameText.Outline = true
+            nameText.Font = Drawing.Fonts.UI -- Use a built-in UI font for better readability
+            nameText.Parent = Environment.FOVCircle
+
+            -- Display "None" if the player is not being locked onto
+            Environment.FOVCircle.Text = ""
+        end
+    else
+        -- Display "None" if the player is not being locked onto
+        Environment.FOVCircle.Text = "None"
     end
 end
 
