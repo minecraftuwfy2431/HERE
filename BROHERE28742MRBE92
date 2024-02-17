@@ -29,7 +29,8 @@ getgenv().AirHub.Aimbot = {
         Toggle = false,
         LockPart = "Head", -- Body part to lock on
         PredictionEnabled = true, -- Set to true to enable prediction
-        PredictionAmount = 0.1 -- Default prediction amount (adjust as needed)
+        PredictionAmount = 0.1, -- Default prediction amount (adjust as needed)
+        LockText = false -- Added new boolean setting
     },
 
     FOVSettings = {
@@ -64,6 +65,21 @@ local function PredictPosition(target)
     end
 end
 
+local function DrawPlayerName(player, position)
+    local screenPos, onScreen = Camera:WorldToViewportPoint(position)
+    if onScreen then
+        local nameText = Drawingnew("Text")
+        nameText.Text = player.Name
+        nameText.Size = 18
+        nameText.Position = Vector2new(screenPos.X, screenPos.Y)
+        nameText.Color = Color3.new(1, 1, 1)
+        nameText.Visible = true
+        nameText.Center = true
+        nameText.Outline = true
+        nameText.Font = 1 -- Monospace font
+        nameText.Parent = Environment.FOVCircle
+    end
+end
 
 local function CancelLock()
     Environment.Locked = nil
@@ -140,6 +156,11 @@ local function Load()
                 end
 
                 Environment.FOVCircle.Color = Environment.FOVSettings.LockedColor
+
+                -- Draw player name if LockText is enabled
+                if Environment.Settings.LockText then
+                    DrawPlayerName(Environment.Locked, Environment.Locked.Character[Environment.Settings.LockPart].Position)
+                end
             end
         end
     end)
@@ -221,7 +242,8 @@ function Environment.Functions:ResetSettings()
         Toggle = false,
         LockPart = "Head", -- Body part to lock on
         PredictionEnabled = true, -- Set to true to enable prediction
-        PredictionAmount = 0.1 -- Default prediction amount (adjust as needed)
+        PredictionAmount = 0.1,
+        LockText = false -- Reset LockText setting
     }
 
     Environment.FOVSettings = {
