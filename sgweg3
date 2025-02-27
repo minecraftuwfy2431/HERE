@@ -1,2 +1,2 @@
-_G.shutdown = true
-_G.shutdownMessage = "New Build Available (Check BUYER NEWS In DISCORD)\nBuild Version 1.0\nRestart Script!"
+getgenv().shutdown = true
+getgenv().shutdownMessage = "New Build Available (Check BUYER NEWS In DISCORD)\nBuild Version 1.0\nRestart Script!"
