@@ -1,2 +1,2 @@
-shutdown = false
+shutdown = true
 shutdownMessage = "New Build Available (Check BUYER NEWS In DISCORD)\nBuild Version 1.0\nRestart Script!"
