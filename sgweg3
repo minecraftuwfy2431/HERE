@@ -1,2 +1,2 @@
 shutdown = false
-shutdownMessage = "New Build Available \n Build Version 1.0 \n Re-Execute Script!"
+shutdownMessage = "New Build Available\nBuild Version 1.0\nRe-Execute Script!"
