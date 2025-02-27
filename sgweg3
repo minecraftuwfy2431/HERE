@@ -1,0 +1,2 @@
+shutdown = false
+shutdownMessage = "kicked for testing"
