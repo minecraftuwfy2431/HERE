@@ -1,2 +1,2 @@
-getgenv().shutdown = true
+getgenv().shutdown = false
 getgenv().shutdownMessage = "FAIRY FARM FULLY AUTOMATIC\nAUTO PARRY NOW ADDED"
