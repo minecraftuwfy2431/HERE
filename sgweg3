@@ -1,2 +1,2 @@
-getgenv().shutdown = false
-getgenv().shutdownMessage = "WE ARE CHECKING FOR ANTI CHEAT CHANGES \nWE WILL BE ONLINE SHORTLY"
+getgenv().shutdown = true
+getgenv().shutdownMessage = "FAIRY FARM FULLY AUTOMATIC\nAUTO PARRY NOW ADDED"
