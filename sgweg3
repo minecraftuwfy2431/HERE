@@ -1,2 +1,2 @@
-getgenv().shutdown = true
+getgenv().shutdown = false
 getgenv().shutdownMessage = "important fairy farm update, please wait around ~ 5m then re-execute"
